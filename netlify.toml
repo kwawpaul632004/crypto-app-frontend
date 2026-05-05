@@ -1,0 +1,45 @@
+# Netlify config for drag-and-drop deployment of the public/ folder
+# Place this file INSIDE public/ so it travels with the frontend when uploaded to Netlify
+
+[build]
+  # No build command needed — this is a static site
+  command = "echo 'Static site, no build required'"
+  publish = "."
+
+# Redirect rules (duplicated here for redundancy with _redirects file)
+[[redirects]]
+  from = "/login"
+  to = "/login.html"
+  status = 200
+
+[[redirects]]
+  from = "/register"
+  to = "/register.html"
+  status = 200
+
+[[redirects]]
+  from = "/profile"
+  to = "/profile.html"
+  status = 200
+
+[[redirects]]
+  from = "/add-crypto"
+  to = "/add-crypto.html"
+  status = 200
+
+[[redirects]]
+  from = "/crypto/gainers"
+  to = "/crypto/gainers.html"
+  status = 200
+
+[[redirects]]
+  from = "/crypto/new"
+  to = "/crypto/new.html"
+  status = 200
+
+# Catch-all: serve index.html for any unmatched route (prevents 404 on refresh)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+

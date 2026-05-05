@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crypto App | Student Project</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="/" class="logo">Crypto App</a>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/crypto/gainers.html">Top Gainers</a></li>
+        <li><a href="/crypto/new.html">New Listings</a></li>
+        <li><a href="/profile.html">Profile</a></li>
+        <li id="auth-links">
+          <a href="/login.html">Login</a>
+          <a href="/register.html" class="btn-primary">Get Started</a>
+        </li>
+        <li id="logout-link" style="display:none;">
+          <button onclick="logout()" class="btn-secondary">Logout</button>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="container">
+      <h1>Jump start your crypto portfolio</h1>
+      <p>Buy, sell, and manage your cryptocurrencies all in one place.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="crypto-section">
+      <div class="section-header">
+        <h2>All Tradable Cryptocurrencies</h2>
+        <a href="/add-crypto.html" class="btn-primary">Add New Crypto</a>
+      </div>
+      <div id="crypto-list" class="crypto-grid">
+        <p class="loading">Loading cryptocurrencies...</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2024 Crypto App. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="/js/config.js"></script>
+  <script src="/js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      checkAuthStatus();
+      loadAllCrypto();
+    });
+  </script>
+</body>
+</html>

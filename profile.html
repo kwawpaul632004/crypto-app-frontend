@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile - Crypto App | Student Project</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="/" class="logo">Crypto App</a>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/crypto/gainers.html">Top Gainers</a></li>
+        <li><a href="/crypto/new.html">New Listings</a></li>
+        <li><a href="/profile.html">Profile</a></li>
+        <li><button onclick="logout()" class="btn-secondary">Logout</button></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="container auth-page">
+    <div class="auth-card profile-card">
+      <h2>User Profile</h2>
+      <p>Your personal dashboard.</p>
+
+      <div id="profile-content">
+        <p class="loading">Loading profile...</p>
+      </div>
+    </div>
+  </main>
+
+  <script src="/js/config.js"></script>
+  <script src="/js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        window.location.href = '/login.html';
+        return;
+      }
+
+      const result = await getProfile();
+      const contentDiv = document.getElementById('profile-content');
+
+      if (result.success) {
+        const user = result.data;
+        contentDiv.innerHTML = `
+          <div class="profile-info">
+            <div class="info-row">
+              <span class="label">Name:</span>
+              <span class="value">${user.name}</span>
+            </div>
+            <div class="info-row">
+              <span class="label">Email:</span>
+              <span class="value">${user.email}</span>
+            </div>
+            <div class="info-row">
+              <span class="label">Member Since:</span>
+              <span class="value">${new Date(user.createdAt).toLocaleDateString()}</span>
+            </div>
+            <div class="info-row">
+              <span class="label">User ID:</span>
+              <span class="value">${user._id}</span>
+            </div>
+          </div>
+        `;
+      } else {
+        contentDiv.innerHTML = '<p class="error">Failed to load profile. ' + (result.message || '') + '</p>';
+        if (result.message && result.message.includes('token')) {
+          setTimeout(() => {
+            window.location.href = '/login.html';
+          }, 2000);
+        }
+      }
+    });
+  </script>
+</body>
+</html>
+

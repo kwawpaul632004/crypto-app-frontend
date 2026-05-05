@@ -1,0 +1,15 @@
+# Netlify Redirects for Crypto App Frontend
+# This file ensures proper routing when the public/ folder is deployed via drag-and-drop
+
+# Clean URL redirects: map pretty URLs to actual HTML files
+/login         /login.html         200
+/register      /register.html      200
+/profile       /profile.html       200
+/add-crypto    /add-crypto.html    200
+/crypto/gainers /crypto/gainers.html 200
+/crypto/new    /crypto/new.html    200
+
+# Fallback: if a path is not found, serve index.html (SPA-style fallback)
+# This prevents raw Netlify 404 pages for unknown routes
+/*             /index.html         200
+
